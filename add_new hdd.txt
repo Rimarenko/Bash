@@ -1,0 +1,6 @@
+ATENTION! you use at your own risk
+echo -e "nn\np\n1\n\n\nw" | sudo fdisk /dev/sdb 					# Create new disk
+echo y | sudo mkfs -F -t ext4 /dev/sdb							# Format disk ext4
+sudo mkdir /backup									# New folder, where mount new disk
+sudo mount /dev/sdb1 /backup								# Mount new disk
+echo "/dev/sdb1   /backup   ext4   defaults   1   2" | sudo tee -a  /etc/fstab		# Auto mount new disk
