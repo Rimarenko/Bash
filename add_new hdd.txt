@@ -1,6 +1,21 @@
-ATENTION! you use at your own risk
+#ATENTION! you use at your own risk
+
+# Creat and mount new disk
+
 echo -e "nn\np\n1\n\n\nw" | sudo fdisk /dev/sdb 					# Create new disk
-echo y | sudo mkfs -F -t ext4 /dev/sdb							# Format disk ext4
+echo y | sudo mkfs -F -t ext4 /dev/sdb1							# Format disk ext4
 sudo mkdir /backup									# New folder, where mount new disk
 sudo mount /dev/sdb1 /backup								# Mount new disk
 echo "/dev/sdb1   /backup   ext4   defaults   1   2" | sudo tee -a  /etc/fstab		# Auto mount new disk
+
+
+# Creating a Partition Size Larger Than 2TB
+
+fdisk -l /dev/sdb
+parted /dev/sdb
+	mklabel gpt
+	unit TB
+	mkpart primary 0.00TB 4.00TB
+	print
+	quit
+echo y | sudo mkfs -F -t ext4 /dev/sdb1
